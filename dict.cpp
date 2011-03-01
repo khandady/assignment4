@@ -15,11 +15,12 @@ Dict::Dict(string f)
 {
 	word = NULL;
 	//phrs = NULL;
-	//sent = NULL;
+	sent = NULL;
 	const char BLANK = ' ',
 		   ENDST = '.';
 	char ch;
 	ifstream source(f.c_str());
+	ifstream *file = &source;
 	if ( !source)
 	{
 		cerr << "File could not be opened" << endl;
@@ -28,61 +29,69 @@ Dict::Dict(string f)
 
 	//Create word list
 	int i = 0;
-	while (source.eof() == 0 )
+	while (file->eof() == 0 )
 	{
-		source.get(ch);
+		file->get(ch);
 		//cout << ch << endl;
 		if ((ch == BLANK) || (ch == ENDST))
 		{
-			cout << i << endl;
+			//cout << i << endl;
 			i++;
 		}
 	}
 	word = new string [i];
 	i = 0;
-	source.clear();
-	source.seekg(0);
-	while (source.eof() == 0)
+	file->clear();
+	file->seekg(0);
+	while (file->eof() == 0)
 	{
-		char buffer[250];
-		source >> buffer;
+		string test;
+		//char buffer[250];
+		(*file) >> test;
 		//word[i] = NULL;
-		word[i].assign(buffer);
-		cout << word[i] << endl;
+		word[i].assign(test);
+		//cout << word[i] << endl;
 		i++;
 	}
-	source.clear();
-	source.seekg(0);
+	file->clear();
+	file->seekg(0);
 	i = 0;
-/*	
+	
 	//Create sentence list
-	while (source.eof() == 0)
+	while (file->eof() == 0)
 	{
 		cout << "checking sentence size" << endl;
-		source.get(ch);
+		file->get(ch);
 		if (ch == ENDST)
 		{
 			i++;
 		}
+		cout << i << endl;
 	}
 
-	sent = new string*[i];
+	sent = new string[i];
+	int limit = i;
+	cout << "Memory Allocated" << endl;
 	i=0;
-	source.clear();
-	source.seekg(0);
-	while (source.eof() == 0)
+	file->clear();
+	file->seekg(0);
+	cout << "Entering while loop" << endl;
+	while (file->eof() == 0 && i < limit)
 	{
-		void *ptr = &sent[i];
-		source.get((char *) ptr,250,46);
-		i++;
+		if (i < limit){
+		string buffer;
+		getline(*file, buffer,'.');
+		sent[i].assign(buffer);
+		i++;}
 	}
-	source.clear();
-	source.seekg(0);
-	i = 0;*/
+	file->clear();
+	file->seekg(0);
+	i = 0;
+	cout << limit << endl;
 }
 
 void Dict::print(int i)
 {
-	cout << word[i] << endl;
+	cout << sent[i] << endl;
 }
 

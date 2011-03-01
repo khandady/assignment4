@@ -12,7 +12,7 @@ class Dict
 	private:
 	string *word;
 	//string **phrs;
-	//string **sent;
+	string *sent;
 
 	public:
 	Dict(string f);
