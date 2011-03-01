@@ -13,6 +13,9 @@ using namespace std;
 //Constructor
 Dict::Dict(string f)
 {
+	word = NULL;
+	//phrs = NULL;
+	//sent = NULL;
 	const char BLANK = ' ',
 		   ENDST = '.';
 	char ch;
@@ -35,24 +38,23 @@ Dict::Dict(string f)
 			i++;
 		}
 	}
-	cout << "Declare memory" << endl;
-	word = new string[i];
+	word = new string [i];
 	i = 0;
 	source.clear();
 	source.seekg(0);
-	cout << "Storage loop" << endl;
 	while (source.eof() == 0)
 	{
-		cout << "in loop" << endl;
-		void *ptr = &word[i];
-		source.get((char *) ptr,250, BLANK);
+		char buffer[250];
+		source >> buffer;
+		//word[i] = NULL;
+		word[i].assign(buffer);
+		cout << word[i] << endl;
 		i++;
 	}
-	cout << "clear source" << endl;
 	source.clear();
 	source.seekg(0);
 	i = 0;
-	
+/*	
 	//Create sentence list
 	while (source.eof() == 0)
 	{
@@ -64,7 +66,7 @@ Dict::Dict(string f)
 		}
 	}
 
-	sent = new string[i];
+	sent = new string*[i];
 	i=0;
 	source.clear();
 	source.seekg(0);
@@ -76,11 +78,11 @@ Dict::Dict(string f)
 	}
 	source.clear();
 	source.seekg(0);
-	i = 0;
+	i = 0;*/
 }
 
 void Dict::print(int i)
 {
-	cout << *word << endl;
+	cout << word[i] << endl;
 }
 

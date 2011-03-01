@@ -11,13 +11,13 @@ class Dict
 {
 	private:
 	string *word;
-	//string *phrs;
-	string *sent;
+	//string **phrs;
+	//string **sent;
 
 	public:
 	Dict(string f);
 	//~Dict();
-	//string lookup_word(int);
+	//tring lookup_word(int);
 	//string lookup_phrs(int);
 	//string lookup_sent(int);
 	void print(int);
