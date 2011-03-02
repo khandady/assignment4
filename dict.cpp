@@ -40,17 +40,29 @@ Dict::Dict(string f)
 		}
 	}
 	word = new string [i];
+	int limit = i; //used to avoid segmentation fault
+	int ref = i; //used to construct phrase list
 	i = 0;
 	file->clear();
 	file->seekg(0);
 	while (file->eof() == 0)
 	{
+		if (i<limit){
 		string test;
-		//char buffer[250];
-		(*file) >> test;
+		getline(*file, test, ' ');
 		//word[i] = NULL;
 		word[i].assign(test);
 		//cout << word[i] << endl;
+		i++;}
+	}
+	i = 0;
+	while (i < ref)
+	{
+		int pos = word[i].find('.');
+		if (pos > -1)
+		{
+			word[i].erase(pos);
+		}
 		i++;
 	}
 	file->clear();
@@ -60,22 +72,18 @@ Dict::Dict(string f)
 	//Create sentence list
 	while (file->eof() == 0)
 	{
-		cout << "checking sentence size" << endl;
 		file->get(ch);
 		if (ch == ENDST)
 		{
 			i++;
 		}
-		cout << i << endl;
 	}
 
 	sent = new string [i];
-	int limit = i;
-	cout << "Memory Allocated" << endl;
+	limit = i;
 	i=0;
 	file->clear();
 	file->seekg(0);
-	cout << "Entering while loop" << endl;
 	while (file->eof() == 0 && i < limit)
 	{
 		if (i < limit){
@@ -87,12 +95,56 @@ Dict::Dict(string f)
 	file->clear();
 	file->seekg(0);
 	i = 0;
-	cout << limit << endl;
+	
+	cout << "starting phrase list" << endl;
+	//create phrase list from word list
+	phrs = new string[(4*ref)-10];
+	string buff;
+	string *buffer = &buff;
+	int iref; //a counter to help
+	cout << "first while loop" << endl;
+	while (i < (ref-1))
+	{
+		buffer->assign(word[i]);
+		buffer->append(" ").append(word[i+1]);
+		phrs[i].assign(*buffer);
+		i++;
+	}
+	iref = i - (ref-1);
+	cout << "second while loop" << endl;
+	while (i < ((2*ref)-3))
+	{
+		buffer->assign(word[iref]);
+		buffer->append(" ").append(word[iref+1]).append(" ").append(word[iref+2]);
+		phrs[i].assign(*buffer);
+		i++;
+		iref++;
+	}
+	iref = i - ((2*ref) -3);
+	cout << "third while loop" << endl;
+	while (i < ((3*ref)-6))
+	{
+		buffer->assign(word[iref]);
+		buffer->append(" ").append(word[iref+1]).append(" ").append(word[iref+2]).append(" ").append(word[iref+3]);
+		phrs[i].assign(*buffer);
+		i++;
+		iref++;
+	}
+	iref = i - ((3*ref)-6);
+	cout << "last while loop" << endl;
+	while (i < ((4*ref)-10))
+	{
+		buffer->assign(word[iref]);
+		buffer->append(" ").append(word[iref+1]).append(" ").append(word[iref+2]).append(" ").append(word[iref+3]).append(" ").append(word[iref+4]);
+		phrs[i].assign(*buffer);
+		i++;
+		iref++;
+	}
 }
 
 void Dict::print(int i)
 {
-	cout << sent[i] << endl;
+	cout << phrs[i] << endl;
 }
 
 Dict::~Dict()
@@ -100,4 +152,5 @@ Dict::~Dict()
 	cout << "Deleting dictionary" << endl;
 	delete [] sent;
 	delete [] word;
+	delete [] phrs;
 }

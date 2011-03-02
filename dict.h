@@ -11,7 +11,7 @@ class Dict
 {
 	private:
 	string *word;
-	//string **phrs;
+	string *phrs;
 	string *sent;
 
 	public:
