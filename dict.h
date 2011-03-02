@@ -21,5 +21,6 @@ class Dict
 	//string lookup_phrs(int);
 	//string lookup_sent(int);
 	void print(int);
+	~Dict();
 };
 #endif

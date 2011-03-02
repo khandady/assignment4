@@ -69,7 +69,7 @@ Dict::Dict(string f)
 		cout << i << endl;
 	}
 
-	sent = new string[i];
+	sent = new string [i];
 	int limit = i;
 	cout << "Memory Allocated" << endl;
 	i=0;
@@ -95,3 +95,9 @@ void Dict::print(int i)
 	cout << sent[i] << endl;
 }
 
+Dict::~Dict()
+{
+	cout << "Deleting dictionary" << endl;
+	delete [] sent;
+	delete [] word;
+}
