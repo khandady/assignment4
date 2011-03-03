@@ -161,14 +161,100 @@ Dict::Dict(string f)
 		i++;
 		iref++;
 	}
-
 	//sort
-	//sort(word,word +ref);
+	sort(word,word +ref);
+	sort(sent,sent +limit);
+	sort(phrs,phrs +((4*ref)-10));
+
+	//filtering
+	i=1;
+	int newsize = 1;
+	string test = word[0];
+	while(i<ref)
+	{
+		if(test.compare(word[i]) == 0)
+		{i++;}
+		else
+		{i++;newsize++;test=word[i];}
+	}
+	string *ptr = new string[newsize];
+	test = word[0];
+	ptr[0].assign(test);
+	i=1;
+	int newcount = 0;
+	while(i<ref)
+	{
+		if(ptr[newcount].compare(word[i]) == 0)
+		{i++;}
+		else
+		{i++;newcount++;ptr[newcount].assign(word[i]);}
+	}
+	delete [] word;
+	word = ptr;
+	//sentence filter
+	cout << "sentence filter" << endl;
+        i=1;
+        newsize = 1;
+        test = sent[0];
+	cout << "first sent loop" << endl;
+	cout << limit << endl;
+        while(i<limit)
+        {
+		cout << i << endl;
+                if(test.compare(sent[i]) == 0)
+                {i++;}
+                else
+                {newsize++;test=sent[i];i++;}
+        }
+	cout << "out of loop" << endl;
+        ptr = new string[newsize];
+        test = sent[0];
+        ptr[0].assign(test);
+        i=1;
+        newcount = 0;
+	cout << "second sent loop" << endl;
+        while(i<limit)
+        {
+                if(ptr[newcount].compare(sent[i]) == 0)
+                {i++;}
+                else
+                {newcount++;ptr[newcount].assign(sent[i]);i++;}
+        }
+        delete [] sent;
+        sent = ptr;
+	//phrase filter
+	cout << "phrase filter" << endl;
+        i=1;
+        newsize = 1;
+        test = phrs[0];
+        while(i<((4*ref)-10))
+        {
+                if(test.compare(phrs[i]) == 0)
+                {i++;}
+                else
+                {newsize++;test=phrs[i];i++;}
+        }
+        ptr = new string[newsize];
+        test = phrs[0];
+        ptr[0].assign(test);
+        i=1;
+        newcount = 0;
+        while(i<((4*ref)-10))
+        {
+                if(ptr[newcount].compare(phrs[i]) == 0)
+                {i++;}
+                else
+                {newcount++;ptr[newcount].assign(phrs[i]);i++;}
+        }
+        delete [] phrs;
+        phrs = ptr;
+
 }
+
 
 void Dict::print(int i)
 {
-	cout << sent[i] << endl;
+	cout << word[i] << endl;
 }
 
 Dict::~Dict()
