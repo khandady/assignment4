@@ -249,9 +249,26 @@ Dict::Dict(string f)
         delete [] phrs;
         phrs = ptr;
 
+	//set lengths
+	wordl = ref;
+	phrsl = (4*ref)+10;
+	sentl = limit;
+
 }
 
+string Dict::lookup(int type, int i)
+{
+	if (type = 1) {return word[i];}
+	if (type = 2) {return phrs[i];}
+	if (type = 3) {return sent[i];}
+}
 
+int Dict::getlength(int i)
+{
+	if (i = 1) {return wordl;}
+	if (i = 2) {return phrsl;}
+	if (i = 3) {return sentl;}
+}
 void Dict::print(int i)
 {
 	cout << word[i] << endl;
