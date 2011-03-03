@@ -11,7 +11,7 @@ class Dict
 {
 	private:
 	string *word;
-	//string **phrs;
+	string *phrs;
 	string *sent;
 
 	public:
@@ -21,5 +21,6 @@ class Dict
 	//string lookup_phrs(int);
 	//string lookup_sent(int);
 	void print(int);
+	~Dict();
 };
 #endif

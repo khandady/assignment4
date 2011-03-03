@@ -5,6 +5,6 @@ int
 main(void)
 {
 	Dict alist("new-data.txt");
-	alist.print(457);
+	alist.print(770);
 	return 0;
 }

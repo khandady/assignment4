@@ -25,5 +25,4 @@ for(i=0; i < input.length(); i++)					//flags if it is word, phrase, or sentence
 if(flag == 1){               //if input was flagged as word
 	word.complete(input);
 	word.correction(input);
-}
-}
+}}

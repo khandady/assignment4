@@ -2,6 +2,7 @@
    Karthik Handady
    Function definitions for Dict class */
 
+#include <algorithm>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -40,17 +41,29 @@ Dict::Dict(string f)
 		}
 	}
 	word = new string [i];
+	int limit = i; //used to avoid segmentation fault
+	int ref = i; //used to construct phrase list
 	i = 0;
 	file->clear();
 	file->seekg(0);
 	while (file->eof() == 0)
 	{
+		if (i<limit){
 		string test;
-		//char buffer[250];
-		(*file) >> test;
+		getline(*file, test, ' ');
 		//word[i] = NULL;
 		word[i].assign(test);
 		//cout << word[i] << endl;
+		i++;}
+	}
+	i = 0;
+	while (i < ref)
+	{
+		int pos = word[i].find('.');
+		if (pos > -1)
+		{
+			word[i].erase(pos, pos + 1);
+		}
 		i++;
 	}
 	file->clear();
@@ -60,22 +73,18 @@ Dict::Dict(string f)
 	//Create sentence list
 	while (file->eof() == 0)
 	{
-		cout << "checking sentence size" << endl;
 		file->get(ch);
 		if (ch == ENDST)
 		{
 			i++;
 		}
-		cout << i << endl;
 	}
 
-	sent = new string[i];
-	int limit = i;
-	cout << "Memory Allocated" << endl;
+	sent = new string [i];
+	limit = i;
 	i=0;
 	file->clear();
 	file->seekg(0);
-	cout << "Entering while loop" << endl;
 	while (file->eof() == 0 && i < limit)
 	{
 		if (i < limit){
@@ -87,11 +96,171 @@ Dict::Dict(string f)
 	file->clear();
 	file->seekg(0);
 	i = 0;
+	//remove leading whitespace
+	while (i < limit)
+	{
+		int pos = sent[i].find(" ");
+		if (pos == 0)
+		{
+			sent[i].erase(0,1);
+		}
+		else{ i++;}
+	}
+	i = 0;
+	while (i < limit)
+	{
+		int pos = sent[i].find("\n");
+		if (pos != -1)
+		{
+			sent[i].replace(pos,1," ");
+		}
+		else {i++;}
+	}
+	i=0;
+	cout << "starting phrase list" << endl;
+	//create phrase list from word list
+	phrs = new string[(4*ref)-10];
+	string buff;
+	string *buffer = &buff;
+	int iref; //a counter to help
+	cout << "first while loop" << endl;
+	while (i < (ref-1))
+	{
+		buffer->assign(word[i]);
+		buffer->append(" ").append(word[i+1]);
+		phrs[i].assign(*buffer);
+		i++;
+	}
+	iref = i - (ref-1);
+	cout << "second while loop" << endl;
+	while (i < ((2*ref)-3))
+	{
+		buffer->assign(word[iref]);
+		buffer->append(" ").append(word[iref+1]).append(" ").append(word[iref+2]);
+		phrs[i].assign(*buffer);
+		i++;
+		iref++;
+	}
+	iref = i - ((2*ref) -3);
+	cout << "third while loop" << endl;
+	while (i < ((3*ref)-6))
+	{
+		buffer->assign(word[iref]);
+		buffer->append(" ").append(word[iref+1]).append(" ").append(word[iref+2]).append(" ").append(word[iref+3]);
+		phrs[i].assign(*buffer);
+		i++;
+		iref++;
+	}
+	iref = i - ((3*ref)-6);
+	cout << "last while loop" << endl;
+	while (i < ((4*ref)-10))
+	{
+		buffer->assign(word[iref]);
+		buffer->append(" ").append(word[iref+1]).append(" ").append(word[iref+2]).append(" ").append(word[iref+3]).append(" ").append(word[iref+4]);
+		phrs[i].assign(*buffer);
+		i++;
+		iref++;
+	}
+	//sort
+	sort(word,word +ref);
+	sort(sent,sent +limit);
+	sort(phrs,phrs +((4*ref)-10));
+
+	//filtering
+	i=1;
+	int newsize = 1;
+	string test = word[0];
+	while(i<ref)
+	{
+		if(test.compare(word[i]) == 0)
+		{i++;}
+		else
+		{i++;newsize++;test=word[i];}
+	}
+	string *ptr = new string[newsize];
+	test = word[0];
+	ptr[0].assign(test);
+	i=1;
+	int newcount = 0;
+	while(i<ref)
+	{
+		if(ptr[newcount].compare(word[i]) == 0)
+		{i++;}
+		else
+		{i++;newcount++;ptr[newcount].assign(word[i]);}
+	}
+	delete [] word;
+	word = ptr;
+	//sentence filter
+	cout << "sentence filter" << endl;
+        i=1;
+        newsize = 1;
+        test = sent[0];
+	cout << "first sent loop" << endl;
 	cout << limit << endl;
+        while(i<limit)
+        {
+		cout << i << endl;
+                if(test.compare(sent[i]) == 0)
+                {i++;}
+                else
+                {newsize++;test=sent[i];i++;}
+        }
+	cout << "out of loop" << endl;
+        ptr = new string[newsize];
+        test = sent[0];
+        ptr[0].assign(test);
+        i=1;
+        newcount = 0;
+	cout << "second sent loop" << endl;
+        while(i<limit)
+        {
+                if(ptr[newcount].compare(sent[i]) == 0)
+                {i++;}
+                else
+                {newcount++;ptr[newcount].assign(sent[i]);i++;}
+        }
+        delete [] sent;
+        sent = ptr;
+	//phrase filter
+	cout << "phrase filter" << endl;
+        i=1;
+        newsize = 1;
+        test = phrs[0];
+        while(i<((4*ref)-10))
+        {
+                if(test.compare(phrs[i]) == 0)
+                {i++;}
+                else
+                {newsize++;test=phrs[i];i++;}
+        }
+        ptr = new string[newsize];
+        test = phrs[0];
+        ptr[0].assign(test);
+        i=1;
+        newcount = 0;
+        while(i<((4*ref)-10))
+        {
+                if(ptr[newcount].compare(phrs[i]) == 0)
+                {i++;}
+                else
+                {newcount++;ptr[newcount].assign(phrs[i]);i++;}
+        }
+        delete [] phrs;
+        phrs = ptr;
+
 }
+
 
 void Dict::print(int i)
 {
-	cout << sent[i] << endl;
+	cout << word[i] << endl;
 }
 
+Dict::~Dict()
+{
+	cout << "Deleting dictionary" << endl;
+	delete [] sent;
+	delete [] word;
+	delete [] phrs;
+}
