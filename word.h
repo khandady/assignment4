@@ -7,8 +7,8 @@ class Word
 {
 	public:
 		Word();
-		void complete(string input);
-		void correction(string input);
+		void complete(string , const Dict&);
+		void correction(string , const Dict&);
 		void show();
 		void check(string input);
 		~Word();
