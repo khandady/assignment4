@@ -1,0 +1,14 @@
+Michael Riedlin
+Karthik Handady
+
+Readme for hw4
+
+Dict
+-three data members point to string arrays
+-provides constructor, destructor and lookup functions
+-constructor does all the work pertaining to list generation
+-reads file contents into string arrays
+-array contents are susquently formated to remove
+ leading whitespace, punctuation, and newlines
+-arrays are then sorted using STL sort
+-filter loops then rebuild the lists to be unique
