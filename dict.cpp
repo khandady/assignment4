@@ -2,6 +2,7 @@
    Karthik Handady
    Function definitions for Dict class */
 
+#include <algorithm>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -61,7 +62,7 @@ Dict::Dict(string f)
 		int pos = word[i].find('.');
 		if (pos > -1)
 		{
-			word[i].erase(pos);
+			word[i].erase(pos, pos + 1);
 		}
 		i++;
 	}
@@ -95,7 +96,27 @@ Dict::Dict(string f)
 	file->clear();
 	file->seekg(0);
 	i = 0;
-	
+	//remove leading whitespace
+	while (i < limit)
+	{
+		int pos = sent[i].find(" ");
+		if (pos == 0)
+		{
+			sent[i].erase(0,1);
+		}
+		else{ i++;}
+	}
+	i = 0;
+	while (i < limit)
+	{
+		int pos = sent[i].find("\n");
+		if (pos != -1)
+		{
+			sent[i].replace(pos,1," ");
+		}
+		else {i++;}
+	}
+	i=0;
 	cout << "starting phrase list" << endl;
 	//create phrase list from word list
 	phrs = new string[(4*ref)-10];
@@ -140,11 +161,14 @@ Dict::Dict(string f)
 		i++;
 		iref++;
 	}
+
+	//sort
+	//sort(word,word +ref);
 }
 
 void Dict::print(int i)
 {
-	cout << phrs[i] << endl;
+	cout << sent[i] << endl;
 }
 
 Dict::~Dict()
