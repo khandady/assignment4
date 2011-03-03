@@ -15,8 +15,8 @@ using namespace std;
 int main()
 {
 	const Dict book("new-data.txt");
-	char quit = "n";
-	while(quit != "y")						//main loop
+	char quit = 'n';
+	while(quit != 'y')						//main loop
 	{
 		int i=0;
 		int flag=0;
@@ -33,11 +33,11 @@ int main()
 			}
 			else
 				flag = 2;
-			}
+		}
 		if(flag == 1){               				//if input was flagged as word
-			Word *word = new word;
-			word->complete(book);
-			word->correction(book);
+			Word *word = new Word;
+			word->complete(input, book);
+			word->correction(input, book);
 			word->show();
 			cout << "Enter y to quit" << endl;
 			cin >> quit;
