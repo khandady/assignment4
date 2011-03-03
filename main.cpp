@@ -10,10 +10,10 @@ int flag=0;
 Word word;
 string input;
 cout<<"Enter a partial word, phrase, or sentence: ";
-getline(cin, input);
-for(i=0; i < input.length(); i++)
+getline(cin, input);								//get input
+for(i=0; i < input.length(); i++)					//flags if it is word, phrase, or sentence
 {
-	if(input[i] == '.'){
+	if(input[i] == '.'){							
 		flag = 3;
 	}
 	else if(input[i] == '\t'){
@@ -22,6 +22,8 @@ for(i=0; i < input.length(); i++)
 	else
 		flag = 2;
 }
-word.complete(input);
-word.correction(input);
+if(flag == 1){               //if input was flagged as word
+	word.complete(input);
+	word.correction(input);
+}
 }
