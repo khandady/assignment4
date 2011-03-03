@@ -263,11 +263,11 @@ string Dict::lookup(int type, int i)
 	if (type = 3) {return sent[i];}
 }
 
-int getlength(int i)
+int Dict::getlength(int i)
 {
-	if (type = 1) {return wordl;}
-	if (type = 2) {return phrsl;}
-	if (type = 3) {return sentl;}
+	if (i = 1) {return wordl;}
+	if (i = 2) {return phrsl;}
+	if (i = 3) {return sentl;}
 }
 void Dict::print(int i)
 {
