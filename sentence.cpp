@@ -15,7 +15,7 @@ Sentence::Sentence(string in, const Dict *dictionary) : Element
 	chck = NULL;
 	distance = 0;
 	for (int i=0; i<10;i++)
-	{	diststore[i] = 10000;}
+	{diststore[i] = 10000;}
 }
 
 void Sentence::complete(const Dict &d)
@@ -39,3 +39,8 @@ void Sentence::complete(const Dict &d)
 		{
 			//Check distance and store as appropriate
 			distance = test.length() - input.length;
+			int count = 0;
+			while (count < 10)
+			{
+				if (distance < diststore[count])
+				{
