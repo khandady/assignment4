@@ -5,8 +5,9 @@
 //include statements
 #include "dict.cpp"
 #include "word.cpp"
+#include "element.h"
 //#include "phrase.cpp"
-//include "sentence.cpp"
+#include "sentence.cpp"
 #include <iostream>
 #include <string>
 
@@ -42,5 +43,13 @@ int main()
 			cout << "Enter y to quit" << endl;
 			cin >> quit;
 		}
+		if(flag == 3){
+			Sentence *sent = new Sentence(input);
+			sent->complete(book);
+			sent->check(book);
+			sent->show();
+			cout << "made sentence" << endl;
+			cout << "Enter y to quit" << endl;
+			cin >> quit;
 	}
-}
+}}
