@@ -1,25 +1,24 @@
-/* Michael Riedlin
-   Karthik Handady
-   Sentence class for hw4 */
-
 #ifndef SENTENCE_H
 #define SENTENCE_H
-#include "element.h"
-class Sentence : Element
-{
-	private:
-	string input;
-	const Dict *d; //pointer to dictionary
-	string *sent; //pointer to complete container
-	string *chck; //pointer to correct containecorrect container
-	int distance;
-	int diststore[10];
 
-	public:
-	Sentence();
-	virtual void complete(const Dict &d);
-	virtual void check(const Dict &d);
-	virtual void show() const;
-	~Sentence();
-}
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Sentence : public Element
+{
+        public:
+                Sentence(string);
+                virtual void complete(const Dict&);
+                //void correction(const Dict&);
+                virtual void show();
+                virtual void check(const Dict &);
+                ~Sentence();
+        private:
+                string input;
+                string input2;
+                int counter;
+                };
 #endif
+
