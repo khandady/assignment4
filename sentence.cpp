@@ -1,46 +1,102 @@
-/* Michael Riedlin
-   Karthik Handady
-   Class definitions for Sentence */
-
+#include "sentence.h"
+#include "element.h"
 #include <iostream>
 #include <string>
-#include <fstream>
-#include "sentence.h"
-
-Sentence::Sentence(string in, const Dict *dictionary) : Element
+using namespace std;
+Sentence::Sentence(string thesentence)
 {
-	input =  in;
-	d = dictionary;
-	sent = NULL;
-	chck = NULL;
-	distance = 0;
-	for (int i=0; i<10;i++)
-	{diststore[i] = 10000;}
+	input = thesentence;
 }
 
-void Sentence::complete(const Dict &d)
-{
-	sent = new string[10];
-	string test = d.lookup_sent();
-	//If input and string have same length, check to see if they're the same
-	if (test.length() == input.length)
-	{
-		//If same, store string
-		if (test.compare(input) == 0)
-		{
-			sent[0] = test;
-		}
+void Sentence::complete(const Dict& book){
+int a =0;
+int b=0;
+int max;
+max = book.getlength(3);
+cout<<"Sentence completion for: "<<input<<"\n";
+cout<<"--------------------------------"<<"\n";
+while(a < max){
+int counter = 1;
+input2 = book.lookup(3, a);
+for(int i=0; i < input.length()-1; i++){	//for loop that flags counter as zero if beginning is not the same
+	if(input[i] != input2[i]){
+		counter = 0;
+		break;
 	}
-	//If input is shorter than string
-	if (test.length() > input.length)
-	{
-		//If substrings are the same
-		if (input.compare(test.substr(0,input.length())) == 0)
-		{
-			//Check distance and store as appropriate
-			distance = test.length() - input.length;
-			int count = 0;
-			while (count < 10)
-			{
-				if (distance < diststore[count])
-				{
+}
+if(counter == 1){
+	cout<<input2<<"\n";
+	b++;
+}
+a++;
+}
+
+if(b == 0){
+	cout<<"no completion found \n";
+}
+
+}
+
+void Sentence::check(const Dict& book){
+int a =0;
+int b=0;
+int max;
+max = book.getlength(3);
+int n[max];
+string m[max];
+cout<<"Sentence correction for: "<<input<<"\n";
+cout<<"--------------------------------"<<"\n";
+while( a < max){
+int counter = 0;
+int num=0;
+input2 = book.lookup(3, a);
+if(input2.length() > input.length()-1){
+	num=input2.length();
+}
+else {
+	num=input.length()-1;
+}
+//Hamming distance calculator
+for(int i=0; i < num; i++){
+	if(input[i] != input2[i]){
+		counter++;
+	}
+}
+
+
+if(a<10){
+m[a] = input2;
+n[a] = counter;
+}
+else{
+for(int L=0; L<10;L++){
+	if(counter < n[L]){
+		for(int x=11; x>L; x--){
+		n[x] = n[x-1];
+		m[x]= m[x-1];
+		}
+		m[L] = input2;
+		n[L] = counter;
+		break;
+	}	
+}
+}
+
+a++;
+}
+
+for(int w=0; w<10; w++){
+cout<<m[w]<<"  "<<n[w]<<"\n";
+}
+
+}
+
+void Sentence::show(){
+
+
+
+}
+
+Sentence::~Sentence(){
+
+}

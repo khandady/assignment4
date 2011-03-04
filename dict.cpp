@@ -117,13 +117,11 @@ Dict::Dict(string f)
 		else {i++;}
 	}
 	i=0;
-	cout << "starting phrase list" << endl;
 	//create phrase list from word list
 	phrs = new string[(4*ref)-10];
 	string buff;
 	string *buffer = &buff;
 	int iref; //a counter to help
-	cout << "first while loop" << endl;
 	while (i < (ref-1))
 	{
 		buffer->assign(word[i]);
@@ -132,7 +130,6 @@ Dict::Dict(string f)
 		i++;
 	}
 	iref = i - (ref-1);
-	cout << "second while loop" << endl;
 	while (i < ((2*ref)-3))
 	{
 		buffer->assign(word[iref]);
@@ -142,7 +139,6 @@ Dict::Dict(string f)
 		iref++;
 	}
 	iref = i - ((2*ref) -3);
-	cout << "third while loop" << endl;
 	while (i < ((3*ref)-6))
 	{
 		buffer->assign(word[iref]);
@@ -152,7 +148,6 @@ Dict::Dict(string f)
 		iref++;
 	}
 	iref = i - ((3*ref)-6);
-	cout << "last while loop" << endl;
 	while (i < ((4*ref)-10))
 	{
 		buffer->assign(word[iref]);
@@ -193,28 +188,22 @@ Dict::Dict(string f)
 	delete [] word;
 	word = ptr;
 	//sentence filter
-	cout << "sentence filter" << endl;
         i=1;
         newsize = 1;
         test = sent[0];
-	cout << "first sent loop" << endl;
-	cout << limit << endl;
         while(i<limit)
         {
-		cout << i << endl;
                 if(test.compare(sent[i]) == 0)
                 {i++;}
                 else
                 {newsize++;test=sent[i];i++;}
         }
-	cout << "out of loop" << endl;
 	sentl = newsize;
         ptr = new string[newsize];
         test = sent[0];
         ptr[0].assign(test);
         i=1;
         newcount = 0;
-	cout << "second sent loop" << endl;
         while(i<limit)
         {
                 if(ptr[newcount].compare(sent[i]) == 0)
@@ -225,7 +214,6 @@ Dict::Dict(string f)
         delete [] sent;
         sent = ptr;
 	//phrase filter
-	cout << "phrase filter" << endl;
         i=1;
         newsize = 1;
         test = phrs[0];
@@ -261,20 +249,20 @@ Dict::Dict(string f)
 
 string Dict::lookup(int type, int i) const
 {
-	if (type = 1) {return word[i];}
-	if (type = 2) {return phrs[i];}
-	if (type = 3) {return sent[i];}
+	if (type == 1) {return word[i];}
+	if (type == 2) {return phrs[i];}
+	if (type == 3) {return sent[i];}
 }
 
 int Dict::getlength(int i) const
 {
-	if (i = 1) {return wordl;}
-	if (i = 2) {return phrsl;}
-	if (i = 3) {return sentl;}
+	if (i == 1) {return wordl;}
+	if (i == 2) {return phrsl;}
+	if (i == 3) {return sentl;}
 }
 void Dict::print(int i)
 {
-	cout << word[i] << endl;
+	cout << sent[i] << endl;
 }
 
 Dict::~Dict()
