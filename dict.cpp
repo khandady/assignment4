@@ -256,14 +256,14 @@ Dict::Dict(string f)
 
 }
 
-const string Dict::lookup(int type, int i)
+string Dict::lookup(int type, int i) const
 {
 	if (type = 1) {return word[i];}
 	if (type = 2) {return phrs[i];}
 	if (type = 3) {return sent[i];}
 }
 
-const int Dict::getlength(int i)
+int Dict::getlength(int i) const
 {
 	if (i = 1) {return wordl;}
 	if (i = 2) {return phrsl;}
