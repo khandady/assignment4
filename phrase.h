@@ -7,13 +7,14 @@ using namespace std;
 class Phrase
 {
 	public:
-		Phrase();
-		void complete(string , const Dict&);
-		void correction(string , const Dict&);
-		void show();
-		void check(string input);
+		Phrase(string);
+		 virtual void complete(const Dict&);
+       //void correction(const Dict&);
+         virtual void show();
+         virtual void check(const Dict &);
 		~Phrase();
 	private:
+		string input;
 		string input2;
 		int counter;
 		};

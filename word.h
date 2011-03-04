@@ -7,13 +7,14 @@ using namespace std;
 class Word
 {
 	public:
-		Word();
-		void complete(string , const Dict&);
-		void correction(string , const Dict&);
-		void show();
-		void check(string input);
+		Word(string);
+		virtual void complete(const Dict&);
+        //void correction(const Dict&);
+        virtual void show();
+        virtual void check(const Dict &);
 		~Word();
 	private:
+		string input;
 		string input2;
 		int counter;
 		};

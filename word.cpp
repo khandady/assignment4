@@ -3,11 +3,11 @@
 #include <iostream>
 #include <string>
 using namespace std;
-Word::Word(){
-
+Word::Word(string theword){
+	input = theword;
 }
 
-void Word::complete(string input, const Dict& book){
+void Word::complete(const Dict& book){
 int a =0;
 int b=0;
 int max;
@@ -36,12 +36,7 @@ if(b == 0){
 
 }
 
-void Word::check(string input){
-
-
-}
-
-void Word::correction(string input, const Dict& book){
+void Word::check(const Dict& book){
 int a =0;
 int b=0;
 int max;

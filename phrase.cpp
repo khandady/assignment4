@@ -3,11 +3,11 @@
 #include <iostream>
 #include <string>
 using namespace std;
-Phrase::Phrase(){
-
+Phrase::Phrase(string thephrase){
+   input = thephrase;
 }
 
-void Phrase::complete(string input, const Dict& book){
+void Phrase::complete(const Dict& book){
 int a =0;
 int b=0;
 int max;
@@ -36,12 +36,7 @@ if(b == 0){
 
 }
 
-void Phrase::check(string input){
-
-
-}
-
-void Phrase::correction(string input, const Dict& book){
+void Phrase::check(const Dict& book){
 int a=0;
 int b=0;
 int max;

@@ -36,17 +36,17 @@ int main()
 				flag = 2;
 		}
 		if(flag == 1){               				//if input was flagged as word
-			Word *word = new Word;
-			word->complete(input, book);
-			word->correction(input, book);
+			Word *word = new Word(input);
+			word->complete(book);
+			word->check(book);
 			word->show();
 			cout << "Enter y to quit" << endl;
 			cin >> quit;
 		}
 		if(flag == 2){
-			Phrase *phrase = new Phrase;
-			phrase->complete(input, book);
-			phrase->correction(input, book);
+			Phrase *phrase = new Phrase(input);
+			phrase->complete(book);
+			phrase->check(book);
 			phrase->show();
 			cout << "Enter y to quit" << endl;
 			cin >> quit;
