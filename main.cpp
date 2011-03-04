@@ -7,7 +7,7 @@
 #include "word.cpp"
 #include "element.h"
 #include "phrase.cpp"
-//#include "sentence.cpp"
+#include "sentence.cpp"
 #include <iostream>
 #include <string>
 

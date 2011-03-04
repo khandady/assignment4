@@ -1,12 +1,12 @@
 #ifndef SENTENCE_H
 #define SENTENCE_H
-
+#include "element.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-class Sentence : public Element
+class Sentence
 {
         public:
                 Sentence(string);
@@ -19,6 +19,6 @@ class Sentence : public Element
                 string input;
                 string input2;
                 int counter;
-                };
+ };
 #endif
 

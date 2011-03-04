@@ -1,14 +1,15 @@
-/* Michael Riedlin
-   Karthik Handady
-   Element abstract class */
-
 #ifndef ELEMENT_H
 #define ELEMENT_H
-class Element
+#include <iostream>
+#include <string>
+using namespace std;
+class element
 {
 	public:
-	virtual void complete(const Dist &d) = 0;
-	virtual void check(const Dict &d) = 0;
-	virtual void show() = 0;
+		virtual void complete(const Dict &d) = 0;
+		virtual void check(const Dict &d) = 0;
+		virtual void show() const = 0;
+	private:
+		
 };
-#endif 
+#endif

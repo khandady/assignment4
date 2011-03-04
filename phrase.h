@@ -1,18 +1,18 @@
-#ifndef WORD_H
-#define WORD_H
+#ifndef PHRASE_H
+#define PHRASE_H
 #include <iostream>
 #include <string>
 #include "element.h"
 using namespace std;
-class Word
+class Phrase
 {
 	public:
-		Word();
+		Phrase();
 		void complete(string , const Dict&);
 		void correction(string , const Dict&);
 		void show();
 		void check(string input);
-		~Word();
+		~Phrase();
 	private:
 		string input2;
 		int counter;

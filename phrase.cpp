@@ -1,23 +1,23 @@
-#include "word.h"
+#include "phrase.h"
 #include "element.h"
 #include <iostream>
 #include <string>
 using namespace std;
-Word::Word(){
+Phrase::Phrase(){
 
 }
 
-void Word::complete(string input, const Dict& book){
+void Phrase::complete(string input, const Dict& book){
 int a =0;
 int b=0;
 int max;
-max = book.getlength(1);
-cout<<"Word completion for: "<<input<<"\n";
+max = book.getlength(2);
+cout<<"Phrase completion for: "<<input<<"\n";
 cout<<"--------------------------------"<<"\n";
 while(a < max){
 int counter = 1;
-input2 = book.lookup(1, a);
-for(int i=0; i < input.length()-1; i++){	//for loop that flags counter as zero if beginning is not the same
+input2 = book.lookup(2, a);
+for(int i=0; i < input.length(); i++){	//for loop that flags counter as zero if beginning is not the same
 	if(input[i] != input2[i]){
 		counter = 0;
 		break;
@@ -36,29 +36,29 @@ if(b == 0){
 
 }
 
-void Word::check(string input){
+void Phrase::check(string input){
 
 
 }
 
-void Word::correction(string input, const Dict& book){
-int a =0;
+void Phrase::correction(string input, const Dict& book){
+int a=0;
 int b=0;
 int max;
-max = book.getlength(1);
+max = book.getlength(2);
 int n[max];
 string m[max];
-cout<<"Word correction for: "<<input<<"\n";
+cout<<"Phrase correction for: "<<input<<"\n";
 cout<<"--------------------------------"<<"\n";
 while( a < max){
 int counter = 0;
 int num=0;
-input2 = book.lookup(1, a);
-if(input2.length() > input.length()-1){
+input2 = book.lookup(2, a);
+if(input2.length() > input.length()){
 	num=input2.length();
 }
 else {
-	num=input.length()-1;
+	num=input.length();
 }
 //Hamming distance calculator
 for(int i=0; i < num; i++){
@@ -66,7 +66,6 @@ for(int i=0; i < num; i++){
 		counter++;
 	}
 }
-
 
 if(a<10){
 m[a] = input2;
@@ -93,14 +92,15 @@ for(int w=0; w<10; w++){
 cout<<m[w]<<"\n";
 }
 
-}
-
-void Word::show(){
-
-
 
 }
 
-Word::~Word(){
+void Phrase::show(){
+
+
+
+}
+
+Phrase::~Phrase(){
 
 }
