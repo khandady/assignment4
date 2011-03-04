@@ -91,9 +91,9 @@ cout<<m[w]<<"\n";
 
 }
 
-void Sentence::show(){
+void Sentence::show()const{
 
-
+int yss =9;
 
 }
 

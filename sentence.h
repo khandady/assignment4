@@ -12,7 +12,7 @@ class Sentence
                 Sentence(string);
                 virtual void complete(const Dict&);
                 //void correction(const Dict&);
-                virtual void show();
+                virtual void show() const;
                 virtual void check(const Dict &);
                 ~Sentence();
         private:

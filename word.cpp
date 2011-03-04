@@ -90,8 +90,9 @@ cout<<m[w]<<"\n";
 
 }
 
-void Word::show(){
+void Word::show() const{
 
+int iks=2;
 
 
 }

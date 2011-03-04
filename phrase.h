@@ -4,13 +4,13 @@
 #include <string>
 #include "element.h"
 using namespace std;
-class Phrase
+class Phrase : Element
 {
 	public:
 		Phrase(string);
 		 virtual void complete(const Dict&);
        //void correction(const Dict&);
-         virtual void show();
+         virtual void show() const;
          virtual void check(const Dict &);
 		~Phrase();
 	private:

@@ -90,9 +90,9 @@ cout<<m[w]<<"\n";
 
 }
 
-void Phrase::show(){
+void Phrase::show()const{
 
-
+int jks = 1;
 
 }
 
