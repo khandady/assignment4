@@ -5,7 +5,8 @@
 //include statements
 #include "dict.cpp"
 #include "word.cpp"
-//#include "phrase.cpp"
+#include "element.h"
+#include "phrase.cpp"
 //include "sentence.cpp"
 #include <iostream>
 #include <string>
@@ -42,5 +43,14 @@ int main()
 			cout << "Enter y to quit" << endl;
 			cin >> quit;
 		}
+		if(flag == 2){
+			Phrase *phrase = new Phrase;
+			phrase->complete(input, book);
+			phrase->correction(input, book);
+			phrase->show();
+			cout << "Enter y to quit" << endl;
+			cin >> quit;
+		}
+	
 	}
 }
