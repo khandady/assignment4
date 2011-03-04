@@ -54,34 +54,41 @@ while( a < max){
 int counter = 0;
 int num=0;
 input2 = book.lookup(1, a);
-if(input2.length() > input.length()){
+if(input2.length() > input.length()-1){
 	num=input2.length();
 }
-else
-	num=input.length();
+else {
+	num=input.length()-1;
+}
 //Hamming distance calculator
 for(int i=0; i < num; i++){
 	if(input[i] != input2[i]){
 		counter++;
 	}
 }
+
+
+if(a<10){
+m[a] = input2;
+n[a] = counter;
+}
+else{
 for(int L=0; L<10;L++){
 	if(counter < n[L]){
-		for(int x=a; x>L; x--){
+		for(int x=11; x>L; x--){
 		n[x] = n[x-1];
 		m[x]= m[x-1];
 		}
 		m[L] = input2;
 		n[L] = counter;
-	}
-	else if(a<10){
-		n[a] = counter;
-		m[a] = input2;
-	}
-	
+		break;
+	}	
 }
+}
+
 a++;
 }
+
 for(int w=0; w<10; w++){
 cout<<m[w]<<"  "<<n[w]<<"\n";
 }

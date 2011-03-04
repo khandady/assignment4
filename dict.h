@@ -19,8 +19,8 @@ class Dict
 
 	public:
 	Dict(string f);			//constructor
-	const string lookup(int, int);	//finds element of type
-	const int getlength(int);		//returns a list length
+	string lookup(int, int) const;	//finds element of type
+	int getlength(int) const;		//returns a list length
 	void print(int);	
 	~Dict();
 };
