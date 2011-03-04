@@ -16,8 +16,8 @@ using namespace std;
 int main()
 {
 	const Dict book("new-data.txt");
-	char quit = 'n';
-	while(quit != 'y')						//main loop
+	string quit = "n";
+	while(quit != "y")						//main loop
 	{
 		int i=0;
 		int flag=0;
@@ -40,24 +40,21 @@ int main()
 			word->complete(book);
 			word->check(book);
 			word->show();
-			cout << "Enter y to quit" << endl;
-			cin >> quit;
 		}
 		if(flag == 2){
 			Phrase *phrase = new Phrase(input);
 			phrase->complete(book);
 			phrase->check(book);
 			phrase->show();
-			cout << "Enter y to quit" << endl;
-			cin >> quit;
 		}
 		if(flag == 3){
 			Sentence *sent = new Sentence(input);
 			sent->complete(book);
 			sent->check(book);
 			sent->show();
-			cout << "Enter y to quit" << endl;
-			cin >> quit;
 		}
+		cout << "Enter y to quit" << endl;
+		getline(cin, quit);
+		cout<<"\n";
 	}
 }
