@@ -177,6 +177,7 @@ Dict::Dict(string f)
 		else
 		{i++;newsize++;test=word[i];}
 	}
+	wordl = newsize;
 	string *ptr = new string[newsize];
 	test = word[0];
 	ptr[0].assign(test);
@@ -207,6 +208,7 @@ Dict::Dict(string f)
                 {newsize++;test=sent[i];i++;}
         }
 	cout << "out of loop" << endl;
+	sentl = newsize;
         ptr = new string[newsize];
         test = sent[0];
         ptr[0].assign(test);
@@ -234,6 +236,7 @@ Dict::Dict(string f)
                 else
                 {newsize++;test=phrs[i];i++;}
         }
+	phrsl = newsize;
         ptr = new string[newsize];
         test = phrs[0];
         ptr[0].assign(test);
@@ -250,9 +253,9 @@ Dict::Dict(string f)
         phrs = ptr;
 
 	//set lengths
-	wordl = ref;
+	/*wordl = ref;
 	phrsl = (4*ref)+10;
-	sentl = limit;
+	sentl = limit;*/
 
 }
 
