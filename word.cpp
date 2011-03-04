@@ -8,26 +8,30 @@ Word::Word(){
 }
 
 void Word::complete(string input, const Dict& book){
+int a =0;
+int b=0;
 int max;
 max = book.getlength(1);
-cout<<"Max is : "<<max<<"\n";
+cout<<"Word completion for: "<<input<<"\n";
+cout<<"--------------------------------"<<"\n";
+while(a < max){
 int counter = 1;
-cout<<"Enter a word: ";
-getline(cin, input2);
+input2 = book.lookup(1, a);
 for(int i=0; i < input.length()-1; i++){	//for loop that flags counter as zero if beginning is not the same
 	if(input[i] != input2[i]){
 		counter = 0;
 		break;
 	}
 }
-
-cout<<"Word completion for: "<<input<<"\n";
-cout<<"--------------------------------"<<"\n";
-if(counter == 0){
-	cout<<"no completion \n";
-}
-else if(counter == 1){
+if(counter == 1){
 	cout<<input2<<"\n";
+	b++;
+}
+a++;
+}
+
+if(b == 0){
+	cout<<"no completion found \n";
 }
 
 }
@@ -37,23 +41,50 @@ void Word::check(string input){
 
 }
 
-void Word::correction(string input, const Dict&){
-int num = input.length();
+void Word::correction(string input, const Dict& book){
+int a =0;
+int b=0;
+int max;
+max = book.getlength(1);
+int n[max];
+string m[max];
+cout<<"Word correction for: "<<input<<"\n";
+cout<<"--------------------------------"<<"\n";
+while( a < max){
 int counter = 0;
-cout<<"Enter a word: ";
-getline(cin, input2);
-if(input2.length() >= input.length()){
-num = input2.length();
+int num=0;
+input2 = book.lookup(1, a);
+if(input2.length() > input.length()){
+	num=input2.length();
 }
-
+else
+	num=input.length();
 //Hamming distance calculator
 for(int i=0; i < num; i++){
 	if(input[i] != input2[i]){
 		counter++;
 	}
 }
-cout<<"Hamming distance is "<<counter<<"\n";
-// overarching while loop that sorts the array 
+for(int L=0; L<10;L++){
+	if(counter < n[L]){
+		for(int x=a; x>L; x--){
+		n[x] = n[x-1];
+		m[x]= m[x-1];
+		}
+		m[L] = input2;
+		n[L] = counter;
+	}
+	else if(a<10){
+		n[a] = counter;
+		m[a] = input2;
+	}
+	
+}
+a++;
+}
+for(int w=0; w<10; w++){
+cout<<m[w]<<"  "<<n[w]<<"\n";
+}
 
 }
 
