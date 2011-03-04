@@ -7,12 +7,13 @@ Word::Word(){
 
 }
 
-void Word::complete(string input, const Dict&){
-
+void Word::complete(string input, const Dict& book){
+int max;
+max = book.getlength(1);
+cout<<"Max is : "<<max<<"\n";
 int counter = 1;
 cout<<"Enter a word: ";
 getline(cin, input2);
-
 for(int i=0; i < input.length()-1; i++){	//for loop that flags counter as zero if beginning is not the same
 	if(input[i] != input2[i]){
 		counter = 0;
